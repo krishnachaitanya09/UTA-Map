@@ -1,24 +1,77 @@
-﻿<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS, and JavaScript.</p>
-    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>ASP.NET Web API is a framework that makes it easy to build HTTP services that reach
-        a broad range of clients, including browsers and mobile devices. ASP.NET Web API
-        is an ideal platform for building RESTful applications on the .NET Framework.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301870">Learn more &raquo;</a></p>
+﻿<div id="mobile-nav"></div>
+<nav>
+    <div class="menu">
+        <div class="col-sm-12" style="position:absolute;z-index: 9999;right: 0;">
+            <div class="card">
+                <div class="card-block">
+                    <h3 class="card-title">Search POIs</h3>
+                    <div>
+                        <svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#F44336;" />
+                        </svg>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="academicBuildingsCheckbox" /> Academic Buildings
+                        </label>
+                    </div>
+
+                    <div>
+                        <svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#9C27B0;" />
+                        </svg>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="administrativeBuildingsCheckbox" /> Administrative Buildings
+                        </label>
+                    </div>
+
+                    <div>
+                        <svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#673AB7;" />
+                        </svg>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="offCampusCheckbox" /> Off Campus Apartments
+                        </label>
+                    </div>
+
+
+                    <div>
+                        <svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#3F51B5;" />
+                        </svg>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="onCampusCheckbox" /> On Campus Apartments
+                        </label>
+                    </div>
+
+                    <div>
+                        <svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#009688;" />
+                        </svg>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="playgroundsCheckbox" /> Playgrounds
+                        </label>
+                    </div>
+
+                    <div>
+                        <svg width="10" height="10">
+                            <rect width="10" height="10" style="fill:#2196F3;" />
+                        </svg>
+                        <label class="checkbox-inline">
+                            <input type="checkbox" id="residenceHallsCheckbox" /> Residence Halls
+                        </label>
+                    </div>
+
+                    <hr />
+
+                    <input class="form-control" id="search" type="text" placeholder="Enter POI name" />
+
+                    <button class="btn btn-primary" onclick="searchPOI();">Search</button>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301871">Learn more &raquo;</a></p>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301872">Learn more &raquo;</a></p>
-    </div>
-</div>
+</nav>
+
+
+
+<div id="map" style="height: 100%;"></div>
