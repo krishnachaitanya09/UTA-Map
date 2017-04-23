@@ -15,5 +15,6 @@ namespace UTAMap.Models
         public bool Playgrounds { get; set; }
         public bool ResidenceHalls { get; set; }
         public string SearchText { get; set; }
+        public double Radius { get; set; }
     }
 }

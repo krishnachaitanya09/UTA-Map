@@ -4,7 +4,7 @@
         <div class="col-sm-12" style="position:absolute;z-index: 9999;right: 0;">
             <div class="card">
                 <div class="card-block">
-                    <h3 class="card-title">Search POIs</h3>
+                    <h4 class="card-title">Search POIs</h4>
                     <div>
                         <svg width="10" height="10">
                             <rect width="10" height="10" style="fill:#F44336;" />
@@ -61,14 +61,19 @@
                     </div>
 
                     <hr />
-
-                    <input class="form-control" id="search" type="text" placeholder="Enter POI name" />
-
+                    <input class="form-control col-sm-12 margin-bottom" id="search" type="text" placeholder="Enter POI name" />
+                    <input class="form-control col-sm-12 margin-bottom" id="radius" type="text" placeholder="Enter radius in miles" />
                     <button class="btn btn-primary" onclick="searchPOI();">Search</button>
+                    <button class="btn btn-secondary" onclick="clearAllLayers();">Clear</button>
+                </div>
+            </div>
+            <br />
+            <div class="card">
+                <div class="card-block">
+                    <h4 class="card-title">Get Directions</h4>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 </nav>
 

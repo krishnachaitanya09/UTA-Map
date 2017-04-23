@@ -7,6 +7,7 @@ namespace UTAMap.Models
 {
     public class POI
     {
+        [Newtonsoft.Json.JsonRequired]
         public int id { get; set; }
 
         [Newtonsoft.Json.JsonRequired]

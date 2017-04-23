@@ -11,6 +11,10 @@ namespace UTAMap.Models
         public string geom { get; set; }
 
         public string sourcepoi { get; set; }
+
+        [Newtonsoft.Json.JsonRequired]
+        public string sourcegeom { get; set; }
+
         public string name { get; set; }
 
         public string category { get; set; }
