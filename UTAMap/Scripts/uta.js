@@ -7,7 +7,7 @@ var layers = [];
 var colorDictionary = {};
 colorDictionary["Academic Building"] = "#F44336";
 colorDictionary["Administrative Building"] = "#9C27B0";
-colorDictionary["Off Campus Apartments"] = "#673AB7";
+colorDictionary["Off Campus Apartments"] = "#FF9800";
 colorDictionary["On Campus Apartments"] = "#3F51B5";
 colorDictionary["Playground"] = "#009688";
 colorDictionary["Residence Hall"] = "#2196F3";
@@ -50,6 +50,28 @@ function loadPOIs() {
             };
 
             $('#search').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+                {
+                    name: 'pois',
+                    source: substringMatcher(pois)
+                }
+            );
+
+            $('#from').typeahead({
+                hint: true,
+                highlight: true,
+                minLength: 1
+            },
+                {
+                    name: 'pois',
+                    source: substringMatcher(pois)
+                }
+            );
+
+            $('#to').typeahead({
                 hint: true,
                 highlight: true,
                 minLength: 1
@@ -135,7 +157,7 @@ function getNearestPOI(data) {
                             var circle = L.circleMarker(layer.getBounds().getCenter(), { radius: 12, weight: 4, fillOpacity: 1.0, color: 'Black', fillColor: 'White' }).addTo(map);
                             layers.push(circle);
                             if (data["Radius"] != "") {
-                                var radiusCircle = L.circle(layer.getBounds().getCenter(), { color: 'red', fillColor: '#f03', opacity: 0.5,  fillOpacity: 0.1, radius: data["Radius"] * 1609.344 }).addTo(map);
+                                var radiusCircle = L.circle(layer.getBounds().getCenter(), { color: 'red', fillColor: '#f03', opacity: 0.5, fillOpacity: 0.1, radius: data["Radius"] * 1609.344 }).addTo(map);
                                 layers.push(radiusCircle);
                             }
                         }
@@ -186,6 +208,62 @@ function getPOI(data) {
                     }
                 }
             }
+        }
+    });
+}
+
+
+function getDirections() {
+
+    var data = {
+        "From": $("#from").prop("value"),
+        "To": $("#to").prop("value")
+    };
+
+    $.ajax({
+        url: "/api/Direction/GetDirections",
+        method: "post",
+        contentType: 'application/json',
+        dataType: 'json',
+        data: JSON.stringify(data),
+
+        success: function (response) {
+            clearAllLayers();
+            for (var i = 0; i < response.Segments.length; i++) {
+
+                var coordinates = JSON.parse(response.Segments[i].geom);
+                var latlng = [];
+                for (var j = 0; j < coordinates.coordinates.length; j++) {
+                    latlng.push(L.latLng(coordinates.coordinates[j][1], coordinates.coordinates[j][0]));
+                }
+                var layer = L.polyline(latlng, { color: 'red', weight: 6, opacity: 0.9 }).addTo(map);
+                layers.push(layer);
+
+            }
+            var allBounds = [];
+            for (var i = 0; i < response.POIs.length; i++) {
+                var name = response.POIs[i].name;
+
+                var coordinates = JSON.parse(response.POIs[i].geom);
+                for (var j = 0; j < coordinates.coordinates.length; j++) {
+
+                    var bounds = [];
+                    for (var k = 0; k < coordinates.coordinates[j][0].length; k++) {
+                        var r = coordinates.coordinates[j][0][k];
+                        var c = [];
+                        c.push(r[1]);
+                        c.push(r[0]);
+                        bounds.push(c);
+                        allBounds.push(c);
+                    }
+
+                    var layer = L.polygon(bounds, { color: colorDictionary[response.POIs[i].category], weight: 2 }).addTo(map).bindPopup(name);
+                    layers.push(layer);
+                    var marker = L.marker(layer.getBounds().getCenter()).addTo(map).bindPopup(name);
+                    layers.push(marker);
+                }
+            }
+            map.fitBounds(allBounds);
         }
     });
 }

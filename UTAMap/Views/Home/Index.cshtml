@@ -1,7 +1,7 @@
 ﻿<div id="mobile-nav"></div>
 <nav>
     <div class="menu">
-        <div class="col-sm-12" style="position:absolute;z-index: 9999;right: 0;">
+        <div class="col-sm-12" style="position:relative;z-index: 9999;right: 0;overflow-y:scroll;height: 100%;">
             <div class="card">
                 <div class="card-block">
                     <h4 class="card-title">Search POIs</h4>
@@ -25,7 +25,7 @@
 
                     <div>
                         <svg width="10" height="10">
-                            <rect width="10" height="10" style="fill:#673AB7;" />
+                            <rect width="10" height="10" style="fill:#FF9800;" />
                         </svg>
                         <label class="checkbox-inline">
                             <input type="checkbox" id="offCampusCheckbox" /> Off Campus Apartments
@@ -70,9 +70,14 @@
             <br />
             <div class="card">
                 <div class="card-block">
-                    <h4 class="card-title">Get Directions</h4>
+                    <h4 class="card-title">Find Directions</h4>
+                    <input class="form-control col-sm-12 margin-bottom" id="from" type="text" placeholder="From" />
+                    <input class="form-control col-sm-12 margin-bottom" id="to" type="text" placeholder="To" />
+                    <button class="btn btn-primary" onclick="getDirections();">Get Directions</button>
+                    <button class="btn btn-secondary" onclick="clearAllLayers();">Clear</button>
                 </div>
             </div>
+            <br />
         </div>
     </div>
 </nav>

@@ -52,8 +52,9 @@ input[type="text"] {
     line-height: 1.5;
     margin: auto;
     padding-left: 0;
-    width: 25em;
+    width: 21.5em;
     color: #777;
+    height: 100%;
 }
 
     .menu ul {
