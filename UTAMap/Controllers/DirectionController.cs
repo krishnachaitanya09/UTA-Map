@@ -17,14 +17,14 @@ namespace UTAMap.Controllers
         {            
             string query = $"SELECT id FROM ways_vertices_pgr " +
                 $"ORDER BY ST_Distance(st_setsrid(st_makepoint(lon, lat), 4326)::geography, ST_Centroid((SELECT geom FROM buildings b WHERE UPPER(b.name) LIKE UPPER('{direction.From}')))::geography) LIMIT 1";
-            List<String> sourceRoads = db.Database.SqlQuery<String>(query).ToList();
+            List<String> sourceNodes = db.Database.SqlQuery<String>(query).ToList();
             query = $"SELECT id FROM ways_vertices_pgr " +
                 $"ORDER BY ST_Distance(st_setsrid(st_makepoint(lon, lat), 4326)::geography, ST_Centroid((SELECT geom FROM buildings b WHERE UPPER(b.name) LIKE UPPER('{direction.To}')))::geography) LIMIT 1";
-            List<String> targetRoads = db.Database.SqlQuery<String>(query).ToList();
+            List<String> targetNodes = db.Database.SqlQuery<String>(query).ToList();
             List<Route> routes = new List<Route>();
-            foreach (var source in sourceRoads)
+            foreach (var source in sourceNodes)
             {
-                foreach (var target in targetRoads)
+                foreach (var target in targetNodes)
                 {
                     routes.Add(new Route()
                     {

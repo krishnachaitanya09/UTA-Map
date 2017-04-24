@@ -107,7 +107,7 @@ namespace UTAMap.Controllers
                 if (data.AdministrativeBuildings)
                 {
                     string query = $"SELECT p2.name as name, st_asgeojson(p2.geom) as geom, p2.category as category FROM buildings As p1, buildings As p2 " +
-                                   $"WHERE p1.name = '{data.SearchText}' and p1.name <> p2.name and p2.category = 'Administrative Building'" +
+                                   $"WHERE UPPER(p1.name) = UPPER('{data.SearchText}') and p1.name <> p2.name and p2.category = 'Administrative Building'" +
                                    $"ORDER BY ST_Distance(p1.geom, p2.geom) " +
                                    $"LIMIT 1";
                     nearestPOI.AddRange(db.Database.SqlQuery<POI>(query).ToList());
@@ -116,7 +116,7 @@ namespace UTAMap.Controllers
                 if (data.OffCampus)
                 {
                     string query = $"SELECT p2.name as name, st_asgeojson(p2.geom) as geom, p2.category as category FROM buildings As p1, buildings As p2 " +
-                                  $"WHERE UPPER(p1.name = '{data.SearchText}') and p1.name <> p2.name and p2.category = 'Off Campus Apartments'" +
+                                  $"WHERE UPPER(p1.name) = UPPER('{data.SearchText}') and p1.name <> p2.name and p2.category = 'Off Campus Apartments'" +
                                   $"ORDER BY ST_Distance(p1.geom, p2.geom) " +
                                   $"LIMIT 1";
                     nearestPOI.AddRange(db.Database.SqlQuery<POI>(query).ToList());
